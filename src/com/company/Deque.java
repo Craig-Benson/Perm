@@ -93,17 +93,22 @@ return null;
     }
 
     // return an iterator over items in order from front to back
-    public  Iterator<Item> iterator(){
-        Node i = first;
+    public Iterator<Item> iterator()  {return new ListIterator();}
 
-        while(i!= null){
+    public class  ListIterator implements Iterator<Item>{
 
-            System.out.println(i.item);
-            i = i.next;
+        Node current = first;
+
+        public boolean hasNext() {
+            return current != null;
         }
 
+        public Item next() {
+            Item item = (Item) current.item;
+            first = current.next;
 
-        return (Iterator<Item>) i;
+            return item;
+        }
     }
 
     // unit testing (required)
@@ -118,16 +123,17 @@ return null;
         d.addLast(6);
         d.addLast(5);
 
-d.iterator();
 
 d.removeFirst();
-
 d.removeLast();
 d.removeLast();
 
         System.out.println(d.size());
         System.out.println(d.isEmpty());
 
+        while(d.iterator().hasNext()){
+            System.out.println(d.iterator().next());
+        }
 
 
 

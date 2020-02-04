@@ -1,9 +1,10 @@
 package com.company;
 
 import java.util.Iterator;
-import edu.princeton.cs.algs4.StdRandom;
-import edu.princeton.cs.algs4.StdStats;
-import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+import java.util.ListIterator;
+
+import edu.princeton.cs.algs4.*;
+
 
 
 
@@ -18,8 +19,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         first = null;
         remove = null;
         size = 0;
-
-
     }
 
     // is the randomized queue empty?
@@ -42,8 +41,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     // remove and return a random item
-    public Item dequeue(){
-       Node current = first;
+    private Item dequeue(){
+      Node current = first;
 
         first = current.next;
 
@@ -58,8 +57,22 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     // return an independent iterator over items in random order
-    public Iterator<Item> iterator(){
-        return null;
+    public Iterator<Item> iterator()  {return new ListIterator();}
+
+    private class  ListIterator implements Iterator<Item>{
+
+        Node current = first;
+
+           public boolean hasNext() {
+            return current != null;
+        }
+
+        public Item next() {
+            Item item = (Item) current.item;
+            first = current.next;
+
+            return item;
+        }
     }
 
     // unit testing (required)
@@ -68,15 +81,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 
         r.enqueue(1);
-        r.enqueue(2);
-        r.enqueue(3);
-        r.enqueue(4);
-        r.enqueue(5);
-        r.dequeue();
-        r.dequeue();
-        r.dequeue();
-        r.dequeue();
 
+        r.enqueue(5);
+
+        while(r.iterator().hasNext()){
+            System.out.println(r.iterator().next());
+        }
 
     }
 
