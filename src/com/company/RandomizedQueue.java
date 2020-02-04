@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Random;
 
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
@@ -48,14 +49,18 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // return a random item (but do not remove it)
     public Item sample(){
+        Random random = new Random();
+        int min=0;
+        int max= 0;
 
-      int i= 0;
         for(Object item : l ){
-            System.out.println(i+=1);
+            max+=1;
         }
 
-        
-return null;
+        int result = random.nextInt(max-min)+min;
+
+
+return l.get(result);
     }
     // return an independent iterator over items in random order
     public Iterator<Item> iterator()  {return new ListIterator();}
@@ -82,16 +87,18 @@ return null;
 
 
         r.enqueue(1);
-
         r.enqueue(5);
+        r.enqueue(7);
+        r.enqueue(3);
+        r.enqueue(2);
 
         while(r.iterator().hasNext()){
             System.out.println(r.iterator().next());
         }
 
-
-        r.sample();
-
+for(int i =0;i<100;i++) {
+    System.out.println(r.sample());
+}
     }
 
 }
