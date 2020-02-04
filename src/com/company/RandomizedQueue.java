@@ -1,11 +1,7 @@
 package com.company;
 
 import java.util.Iterator;
-import java.util.ListIterator;
-
-import edu.princeton.cs.algs4.*;
-
-
+import java.util.LinkedList;
 
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
@@ -13,12 +9,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private Node first;
     private int size = 0;
     private Item remove;
+    private LinkedList<Item> l;
 
     // construct an empty randomized queue
     public RandomizedQueue(){
         first = null;
         remove = null;
         size = 0;
+        l = new LinkedList<>();
+
     }
 
     // is the randomized queue empty?
@@ -37,25 +36,27 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         first = new Node();
         first.item = item;
         first.next = oldFirst;
+
+        l.add(item);
         size++;
     }
 
     // remove and return a random item
     private Item dequeue(){
-      Node current = first;
-
-        first = current.next;
-
-       return (Item) current.item;
+        return null;
     }
 
     // return a random item (but do not remove it)
     public Item sample(){
 
-        return null;
+      int i= 0;
+        for(Object item : l ){
+            System.out.println(i+=1);
+        }
 
+        
+return null;
     }
-
     // return an independent iterator over items in random order
     public Iterator<Item> iterator()  {return new ListIterator();}
 
@@ -77,7 +78,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // unit testing (required)
     public static void main(String[] args){
-    RandomizedQueue r = new RandomizedQueue();
+    RandomizedQueue<Integer> r = new RandomizedQueue<>();
 
 
         r.enqueue(1);
@@ -87,6 +88,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         while(r.iterator().hasNext()){
             System.out.println(r.iterator().next());
         }
+
+
+        r.sample();
 
     }
 
